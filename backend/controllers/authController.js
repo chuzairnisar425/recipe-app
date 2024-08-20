@@ -1,24 +1,25 @@
-import User from "../models/User";
+import User from '../models/User.js'
+import bcrypt from 'bcrypt';
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
-        let user;
-        user = await User.findOne({ email });
+        let user = await User.findOne({ email });
         if (user) {
-            return res.status(400).json({ success: false, message: "Please singup" });
+            return res.status(400).json({ success: false, message: "Please sign up" });
         }
+
         const hashPassword = await bcrypt.hash(password, 10);
-        user = await User.create({
+        user = new User({
             username,
             email,
             password: hashPassword,
         });
-        await user.save();
-        return res.status(200).json({ success: true, message: 'Signup Successful' });
-    } catch (error) {
-        return res.status(500).json({ success: true, message: error.message });
 
+        await user.save();
+        return res.status(201).json({ success: true, message: 'Signup Successful' });
+    } catch (error) {
+        return res.status(500).json({ success: false, message: error.message });
     }
 };

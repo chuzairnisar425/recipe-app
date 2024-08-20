@@ -1,17 +1,19 @@
-const express = require("express");
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import routes from './routes.js';
+import { connectDB } from './connection.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const app = express();
-const port = 5000;
-
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const routes = require("./routes");
-
-const { connectDB } = require("./connection");
-require("dotenv").config();
+const port = process.env.PORT || 5000;
 
 connectDB();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 app.use("/api", routes);
-app.listen(port, () => console.log(`Server is running at this ${port}`));
+
+app.listen(port, () => console.log(`Server is running at port ${port}`));
