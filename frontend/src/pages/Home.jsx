@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import RecipeCard from "../components/RecipeCard";
-import axios from 'axios'
+import axios from "axios";
 function Home() {
-  const [recipes, setRecipies] = useState([])
+  const [recipe, setRecipies] = useState([]);
 
   const getRecipies = async () => {
-    const res = await axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast')
-    const data = await res.data
-    setRecipies(data.meals)
-    console.log(data.meals)
-  }
+    const res = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast"
+    );
+    const data = await res.data;
+    setRecipies(data.meals);
+    console.log(data.meals);
+  };
   useEffect(() => {
     getRecipies();
-  }, [])
+  }, []);
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="mt-10">
@@ -25,14 +27,15 @@ function Home() {
         "
         />
       </div>
-      <div className="my-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-3">
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
+      <div className="my-10 w-[70-vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-3">
+        {recipe.map((recipe) => (
+          <RecipeCard
+            key={recipe.idMeal}
+            id={recipe.idMeal}
+            title={recipe.strMeal}
+            image={recipe.strMealThumb}
+          />
+        ))}
       </div>
     </div>
   );
