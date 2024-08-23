@@ -5,7 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+*{
   font-family: "Poppins", sans-serif;
-
+scroll-behavior: smooth;
+}
+.TTITLE-TEXT{
+  font-family: 'Whisper',sans-serif;
 }
