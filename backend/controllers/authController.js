@@ -1,6 +1,6 @@
 import { User } from '../models/User.js';
 import bcrypt from "bcrypt";
-
+import jwt from 'jsonwebtoken'
 export const signup = async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -32,7 +32,7 @@ export const login = async (req, res) => {
         let user;
         user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ success: false, message: "Please singup" });
+            return res.status(400).json({ success: false, message: "Please signup" });
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
@@ -45,11 +45,11 @@ export const login = async (req, res) => {
         });
         res.cookie('token', token, {
             httpOnly: true,
-            expires: new Date(Date.now() + 1000 * 60 * 60), //1 hr
+            expiresIn: new Date(Date.now() + 1000 * 60 * 60), //1 hr
         })
 
         res.status(200).json({
-            success: true, message: 'Login Successful'
+            success: true, message: 'Login Successful' ,user
         })
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
@@ -62,7 +62,7 @@ export const logout = async (req, res) => {
         res.cookie('token', '', {
             expires: new Date(Date.now())
         })
-        return res.status(200).json({ success: true, message: 'Logouy Successful' });
+        return res.status(200).json({ success: true, message: 'Logout Successful' });
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
     }
