@@ -6,6 +6,9 @@ function Login() {
   return (
     <div>
       <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+        <form action="">
+
+     
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
           <div
             className="absolute inset-0 bg-gradient-to-r from-green-300 to-green-600 shadow-lg transhtmlForm -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
@@ -39,11 +42,12 @@ function Login() {
             </div>
           </div>
         </div>
-        <div className='text-center text-gray-600 text-xs m-auto w-[250px]'>
+        <div className='text-center text-gray-600 text-xs m-auto w-[250px] mt-10'>
           <p className='flex justify-center gap-1 items-center'>
             &copy; 2024 Made with  <HiHeart className='text-red-500' />  from Uzair
           </p>
         </div>
+        </form>
       </div>
 
     </div>
