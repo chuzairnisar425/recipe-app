@@ -1,5 +1,6 @@
 import React from 'react'
-import {Link } from 'react-router-dom'
+import { HiHeart } from 'react-icons/hi2'
+import { Link } from 'react-router-dom'
 
 function Login() {
   return (
@@ -13,7 +14,7 @@ function Login() {
             <div className="max-w-md mx-auto">
               <div>
                 <h1 className="text-2xl font-semibold">Login</h1>
-                <span className='text-lg'>Lets meet and eat together</span>
+                <span className='text-base'>Lets meet and eat together</span>
               </div>
               <div className="divide-y divide-gray-200">
                 <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
@@ -30,15 +31,23 @@ function Login() {
                   </div>
                   <div className='text-xs flex gap-2'>
                     <span>  Or</span>
-                    <Link to='/signup'className='text-green-500 hover:text-green-600 font-semibold'>Create an account</Link>
+                    <Link to='/signup' className='text-green-500 hover:text-green-600 font-semibold'>Create an account</Link>
                   </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div className='text-center text-gray-600 text-xs m-auto w-[250px]'>
+          <p className='flex justify-center gap-1 items-center'>
+            &copy; 2024 Made with  <HiHeart className='text-red-500' />  from Uzair
+          </p>
+        </div>
       </div>
+
     </div>
+
   )
 }
 
