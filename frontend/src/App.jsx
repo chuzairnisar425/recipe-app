@@ -8,9 +8,12 @@ import RecipeDetails from "../src/pages/RecipeDetails";
 import Favourites from "../src/pages/Favourites";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
+import {Provider} from 'react-redux'
+import { store } from "../redux/Store";
 function App() {
   return (
     <>
+<Provider store={store}>
 
       <BrowserRouter>
         <Navbar />
@@ -24,6 +27,7 @@ function App() {
           <Route path="/Favourites" element={<Favourites />} />
         </Routes>
       </BrowserRouter>
+</Provider>
     </>
   );
 }
