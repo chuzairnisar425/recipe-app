@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiHeart } from "react-icons/hi2";
-
+import axios from 'axios'
+import toast from 'react-hot-toast'
 function Signup() {
 
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const handleSignup = (e) => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSignup = async (e) => {
     e.preventDefault();
+    const res = await axios.post(
+      'http://localhost:5000/api/signup',
+      {
+        username, email, password,
+      }, { withCredentials: true, }
+
+    )
+    const data = await res.data
+    if (data.success) {
+      toast.success(data.message);
+    }
   }
 
   return (
@@ -33,6 +45,7 @@ function Signup() {
                         type="text"
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                         placeholder="Username "
+                        value={username}
                         onChange={(e) => setUsername(e.target.value)}
                       />
                       <label
@@ -50,6 +63,7 @@ function Signup() {
                         type="text"
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                         placeholder="Email address"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
                       <label
@@ -67,6 +81,7 @@ function Signup() {
                         type="password"
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                         placeholder="Password"
+                        value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                       <label
