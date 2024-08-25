@@ -7,13 +7,14 @@ import Signup from "../src/pages/Signup";
 import RecipeDetails from "../src/pages/RecipeDetails";
 import Favourites from "../src/pages/Favourites";
 import Navbar from "./components/Navbar";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <>
 
       <BrowserRouter>
-      <Navbar/>
-
+        <Navbar />
+        <Toaster />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
