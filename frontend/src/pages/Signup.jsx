@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiHeart } from "react-icons/hi2";
 import axios from 'axios'
 import toast from 'react-hot-toast'
 function Signup() {
-
+const navigate =useNavigate();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +20,7 @@ function Signup() {
     const data = await res.data
     if (data.success) {
       toast.success(data.message);
+      navigate('/login')
     }
   }
 
