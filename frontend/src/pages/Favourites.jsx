@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getFavourites } from "../../helper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RecipeCard from "../components/RecipeCard";
+import { setFavourites } from "../../slices/authSlice";
 
 function Favourites() {
-  const [favourites, setFavourites] = useState([]);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const favourites = useSelector((state) => state.auth.favourites)
   useEffect(() => {
-    getFavourites(user._id).then((res) => setFavourites(res));
+    getFavourites(user._id).then((res) => dispatch(setFavourites(res)));
   }, []);
 
   return (
