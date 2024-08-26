@@ -18,6 +18,6 @@ router.post("/login", login);
 router.get("/logout", logout);
 router.get("/checkuser", verifyToken, checkUser);
 router.post("/addToFavourites/:id", addToFavourites);
-router.post("/removeFromFavourites", removeFromFavourites);
-router.get("/getFavourites", getFavourites);
+router.post("/removeFromFavourites/:id", removeFromFavourites);
+router.get("/getFavourites/:id", getFavourites);
 export default router;
