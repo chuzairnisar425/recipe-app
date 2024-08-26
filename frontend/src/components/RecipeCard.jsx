@@ -3,10 +3,13 @@ import React from "react";
 import toast from "react-hot-toast";
 import { HiHeart } from "react-icons/hi2";
 import { MdDelete } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-
+import { setFavourites } from "../../slices/authSlice";
+import { getFavourites } from "../../helper";
+import { Link } from "react-router-dom";
 function RecipeCard({ id, title, image }) {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const user = useSelector((state) => state.auth.user);
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -36,12 +39,13 @@ function RecipeCard({ id, title, image }) {
   return (
     <div className="shadow-md flex justify-between flex-col gap-3 p-3 rounded-lg bg-white ">
       <div className="overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          width={250}
-          className="rounded-lf hover:scale-105 transition-all duration-500 ease-out "
-        />
+        <Link to={`recipe/${id}`}>
+          <img
+            src={image}
+            alt={title}
+            width={250}
+            className="rounded-lf hover:scale-105 transition-all duration-500 ease-out "
+          /></Link>
       </div>
       <div className="flex justify-between items-center">
         <span>
@@ -57,6 +61,7 @@ function RecipeCard({ id, title, image }) {
                 strMeal: title,
                 strMealThumb: image,
               });
+              getFavourites(user._id).then((res) => dispatch(setFavourites(res)));
             }}
           />
         ) : (
